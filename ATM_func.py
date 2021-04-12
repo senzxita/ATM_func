@@ -27,7 +27,7 @@ def Register():
     print("Your account number is %s \n" % account_no)
     
 
-# Function for an existinf user to login to the system   
+# Function for an existing user to login to the system   
 def Login():
     Username = input("Enter your name: ")
     allowedUsers = userdb
@@ -42,7 +42,6 @@ def Login():
             accountId = accountdb[userId]
             print("Your account number is %s \n" % accountId) 
             
-            
         else:
             print('Password Incorrect, please try again')
             Login()
@@ -51,6 +50,7 @@ def Login():
         print('Name not found, please try again')
         Login()
 
+# The main function
 def init():
     print("Welcome! are you a new user?")
     answer = input("Enter 'yes' or 'no': ")
