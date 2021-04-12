@@ -13,6 +13,68 @@ userdb = ['Seyi', 'Mike', 'Love']
 passdb = ['passwordSeyi', 'passwordMike', 'passwordLove']
 accountdb = [1632763693, 7423509924, 8273178241]
 
+# The main function
+def init():
+    print("ZURI ATM")
+    print("~~~~~~~~")
+    print("Welcome! are you a new user?")
+    answer = input("Enter 'yes' or 'no': ")
+    if answer == "yes":
+        Register()
+    else:
+        Login()
+
+
+    print('Available options:')
+    print('Enter 1 for Withdrawal')
+    print('Enter 2 for Cash Deposit')
+    print('Enter 3 for Complaint\n')
+
+    selectedOption = int(input('Please select an option: \n'))
+        
+    if(selectedOption == 1):
+        print('you selected the withdrawal option')
+        withdrawal = input("How much would you like to withdraw? ")
+        print("Take your cash of %s naira \n" % withdrawal)
+        print("Would you like to recieve a receipt of your transaction?")
+        receipt = input("Enter 'yes' for receipt, otherwise enter 'no':  ")
+
+        if receipt == "yes":
+            print("\nRECEIPT OF TRANSACTION")
+            print("~~~~~~~~~~~~~~~~~~~~~~ \n")
+            print("TYPE OF TRANSACTION: WITHDRAWAL")
+            print("AMOUNT WITHDRAWN: %s naira" % withdrawal)
+            print("DATE & TIME OF TRANSACTION: %s \n" % dt_string)
+    
+        else:
+            print("NO RECEIPT GENERATED")
+
+
+    elif(selectedOption == 2):
+        print('you selected the deposit option')
+        deposit = input("How much would you like to deposit? ")
+        print('Your current balance is %s naira \n' % deposit)
+        print("Would you like to recieve a receipt of your transaction?")
+        receipt = input("Enter 'yes' for receipt, otherwise enter 'no': \n ")
+
+        if receipt == "yes":
+            print("\nRECEIPT OF TRANSACTION")
+            print("~~~~~~~~~~~~~~~~~~~~~~ \n")
+            print("TYPE OF TRANSACTION: DESPOSIT")
+            print("AMOUNT WITHDRAWN: %s naira" % deposit)
+            print("DATE & TIME OF TRANSACTION: %s \n" % dt_string)
+    
+        else:
+            print("NO RECEIPT GENERATED")
+             
+    elif(selectedOption == 3):
+        print('you selected the complaint option')
+        complaint = input('What issue will you like to report? ')
+        print("Thank you for contacting us")
+        
+    else:
+        print('Invalid Option selected, please try again')
+
 # Function to Register a new user
 def Register():
     Username = input("What is your name? \n")
@@ -50,65 +112,7 @@ def Login():
         print('Name not found, please try again')
         Login()
 
-# The main function
-def init():
-    print("Welcome! are you a new user?")
-    answer = input("Enter 'yes' or 'no': ")
-    if answer == "yes":
-        Register()
-    else:
-        Login()
 
-
-    print('Available options:')
-    print('Enter 1 for Withdrawal')
-    print('Enter 2 for Cash Deposit')
-    print('Enter 3 for Complaint\n')
-
-    selectedOption = int(input('Please select an option: \n'))
-        
-    if(selectedOption == 1):
-        print('you selected the withdrawal option')
-        withdrawal = input("How much would you like to withdraw? ")
-        print("take your cash of %s naira" % withdrawal)
-        print("Would you like to recieve a receipt of your transaction?")
-        receipt = input("Enter 'yes' for receipt, otherwise enter 'no':  ")
-
-        if receipt == "yes":
-            print("\nRECEIPT OF TRANSACTION")
-            print("~~~~~~~~~~~~~~~~~~~~~~ \n")
-            print("TYPE OF TRANSACTION: WITHDRAWAL")
-            print("AMOUNT WITHDRAWN: %s naira" % withdrawal)
-            print("DATE & TIME OF TRANSACTION: %s \n" % dt_string)
-    
-        else:
-            print("NO RECEIPT GENERATED")
-
-
-    elif(selectedOption == 2):
-        print('you selected the deposit option')
-        deposit = input("How much would you like to deposit? ")
-        print('Your current balance is %s naira' % deposit)
-        print("Would you like to recieve a receipt of your transaction?")
-        receipt = input("Enter 'yes' for receipt, otherwise enter 'no': \n ")
-
-        if receipt == "yes":
-            print("\nRECEIPT OF TRANSACTION")
-            print("~~~~~~~~~~~~~~~~~~~~~~ \n")
-            print("TYPE OF TRANSACTION: DESPOSIT")
-            print("AMOUNT WITHDRAWN: %s naira" % deposit)
-            print("DATE & TIME OF TRANSACTION: %s \n" % dt_string)
-    
-        else:
-            print("NO RECEIPT GENERATED")
-             
-    elif(selectedOption == 3):
-        print('you selected the complaint option')
-        complaint = input('What issue will you like to report? ')
-        print("Thank you for contacting us")
-        
-    else:
-        print('Invalid Option selected, please try again')
 init()
    
 
