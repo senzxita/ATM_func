@@ -74,9 +74,9 @@ def options():
     print('Enter 2 for Cash Deposit')
     print('Enter 3 for Complaint\n')
 
-    selectedOption = int(input('Please select an option: \n'))
+    selectedOption = input('Please select an option: \n')
         
-    if(selectedOption == 1):
+    if(selectedOption == "1"):
         print('You selected the withdrawal option')
         withdrawal = int(input("How much would you like to withdraw? "))
         print("Take your cash of %s naira \n" % withdrawal)
@@ -92,9 +92,9 @@ def options():
     
         else:
             print("NO RECEIPT GENERATED")
-        transaction()
+            transaction()
 
-    elif(selectedOption == 2):
+    elif(selectedOption == "2"):
         print('You selected the deposit option')
         deposit = int(input("How much would you like to deposit? "))
         print('Your current balance is %s naira \n' % deposit)
@@ -112,7 +112,7 @@ def options():
             print("NO RECEIPT GENERATED")
         transaction()  
 
-    elif(selectedOption == 3):
+    elif(selectedOption == "3"):
         print('You selected the complaint option')
         complaint = input('What issue will you like to report? ')
         print("Thank you for contacting us")
