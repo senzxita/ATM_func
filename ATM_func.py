@@ -25,6 +25,50 @@ def init():
         Login()
 
 
+# Function to Register a new user
+def Register():
+    Username = input("What is your name? \n")
+    Password = input("Enter password: ")
+    userdb.append(Username) 
+    passdb.append(Password)
+    print("\nSUCCESSFUL REGISTRATION")
+    print("Welcome %s! \n" % Username)
+    print("Account number is being generated...")
+    account_no = randint(1000000000, 9999999999)
+    accountdb.append(account_no)
+    print("Your account number is %s \n" % account_no)
+    print("Please login with your new details\n")
+    Login()
+    
+# Function for an existing user to login to the system   
+def Login():
+    print("Login to your account\n")
+    Username = input("Enter your name: ")
+    allowedUsers = userdb
+    if(Username in allowedUsers):
+        
+        Password = input("Enter your password: ")
+        userId = allowedUsers.index(Username)
+        
+        if(Password == passdb[userId]):
+            print("\n.......SUCCESSFUL LOGIN....... \n")
+            print('Welcome %s!' % Username)
+            accountId = accountdb[userId]
+            print("Your account number is %s \n" % accountId) 
+            options()
+            
+        else:
+            print('Password Incorrect, please try again')
+            Login()
+
+    else:
+        print('Name not found! please try again')
+        Login()
+
+
+
+# Function to select the transaction
+def options():
     print('Available options:')
     print('Enter 1 for Withdrawal')
     print('Enter 2 for Cash Deposit')
@@ -33,8 +77,8 @@ def init():
     selectedOption = int(input('Please select an option: \n'))
         
     if(selectedOption == 1):
-        print('you selected the withdrawal option')
-        withdrawal = input("How much would you like to withdraw? ")
+        print('You selected the withdrawal option')
+        withdrawal = int(input("How much would you like to withdraw? "))
         print("Take your cash of %s naira \n" % withdrawal)
         print("Would you like to recieve a receipt of your transaction?")
         receipt = input("Enter 'yes' for receipt, otherwise enter 'no':  ")
@@ -48,13 +92,13 @@ def init():
     
         else:
             print("NO RECEIPT GENERATED")
-
+        transaction()
 
     elif(selectedOption == 2):
-        print('you selected the deposit option')
-        deposit = input("How much would you like to deposit? ")
+        print('You selected the deposit option')
+        deposit = int(input("How much would you like to deposit? "))
         print('Your current balance is %s naira \n' % deposit)
-        print("Would you like to recieve a receipt of your transaction?")
+        print("Would you like to receive a receipt of your transaction?")
         receipt = input("Enter 'yes' for receipt, otherwise enter 'no': \n ")
 
         if receipt == "yes":
@@ -66,51 +110,27 @@ def init():
     
         else:
             print("NO RECEIPT GENERATED")
-             
+        transaction()  
+
     elif(selectedOption == 3):
-        print('you selected the complaint option')
+        print('You selected the complaint option')
         complaint = input('What issue will you like to report? ')
         print("Thank you for contacting us")
+        transaction()
         
     else:
         print('Invalid Option selected, please try again')
+        options()
 
-# Function to Register a new user
-def Register():
-    Username = input("What is your name? \n")
-    Password = input("Enter password: ")
-    userdb.append(Username) 
-    passdb.append(Password)
-    print("\nSUCCESSFUL REGISTRATION")
-    print("Welcome %s! \n" % Username)
-    print("Account number is being generated...")
-    account_no = randint(1000000000, 9999999999)
-    accountdb.append(account_no)
-    print("Your account number is %s \n" % account_no)
-    
 
-# Function for an existing user to login to the system   
-def Login():
-    Username = input("Enter your name: ")
-    allowedUsers = userdb
-    if(Username in allowedUsers):
-        
-        Password = input("Enter your password: ")
-        userId = allowedUsers.index(Username)
-        
-        if(Password == passdb[userId]):
-            print("SUCCESSFUL LOGIN \n")
-            print('Welcome %s!' % Username)
-            accountId = accountdb[userId]
-            print("Your account number is %s \n" % accountId) 
-            
-        else:
-            print('Password Incorrect, please try again')
-            Login()
-
-    else:
-        print('Name not found, please try again')
+# Function to exit or continue transaction
+def transaction():
+    print("Would you like to continue your transaction?")
+    choice = input("If 'yes' login again else, 'logout': ")
+    if choice == 'yes':
         Login()
+    else:
+        exit()
 
 
 init()
