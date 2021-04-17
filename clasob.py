@@ -1,105 +1,76 @@
-#This is a class
-
 class Budget:
-    """
-    This is a class Budget
-    """
+    #first instantiating object of the class
+    def __init__(self, name):
+        self.name = name
+        self.ledger = list()
+
+
+
+    #object method for depositing which accept two main parameter, amount and description
+    def deposit(self, amount, description=""):
+            self.ledger.append({"amount": amount, "description": description})
+
+
+    #object method for withdrawing which amount and description as paramenter
+    def withdraw(self, amount, description=""):
+
+        #if statement/condition used to check if there is funds or not.
+        if(self.check_funds(amount)):
+            self.ledger.append({"amount": -amount, "description": description})
+            return True
+        return False
+
+
+    #object method getting the category balance. it returns the actual/current balance/funds.
+    def category_balance(self):
+        total_cash = 0
+
+        for item in self.ledger:
+            total_cash += item["amount"]
+
+        return total_cash
+
+    #object method for for transfer
+    def transfer(self, amount, category):
+
+        if(self.check_funds(amount)):
+            self.withdraw(amount, "Transfer to" + category.name)
+            category.deposit(amount, "Transfer from" + self.name)
+            return True
+        return False
     
-    def __init__(self, depo, withd, trans):
-        
-        self.depo = depo
-        self.withd = withd
-        
-        self.trans = trans
-       
 
-    
-
-    def deposit(self):
-        print("You have deposited %s naira" % self.depo)
-        amount = self.depo
-
-        
-       
-
-    def withdraw(self):
-        
-        print("You have withdrawn %s naira" % self.withd)
-        amount = self.withd
-        self.balance()
-        
-    
-    
+    #object method used to check for funds
+    def check_funds(self, amount):
+        #if statement to check current balance is greater than the initial amount
+        if(self.category_balance() >= amount):
+            return True
+        return False
 
 
 
-    def balance(self):
-        bal = 0
-        bal += self.depo
-        bal -= self.withd
-        print("Current balance is %s naira" % bal)
-        print("Would you like to transfer or logout?")
-        option = input("Enter 'transfer' for transfer else, 'logout': \n")
-        
-        if option == "transfer":
-            self.transfer()
-            
-        elif option == "logout":
-            print("You have ended all transactions")
-            exit()
-        else:
-            print("Invalid option! try again")
-            self.balance()
-            
 
 
-          
+#testing values
+print("**********Food Analysis for deposit, withdraw, transfer, checking of balance****")
+food = Budget("Food")
+food.deposit(2000, "First Deposit")
+food.withdraw(300, "Milk")
+food.withdraw(200, "drinks")
+print(food.category_balance())
 
-    def transfer(self):
-        print("Where would you like to transfer to? \n")
-        print("Enter 1, to transfer fund to clothing \n")
-        print("Enter 2, to transfer fund to entertainment: \n")
-        choice = int(input("Please enter an option: "))
-
-        if choice == 1:
-            amount = int(input("Enter amount: "))
-            print("You have successfully transferred %s naira" % amount)
-            newbal = bal - amount
-            self.balance()
-        
-        elif choice == 2:
-            amount = int(input("Enter amount: "))
-            
-            print("You have successfully transferred %s naira" % amount)
-            newbal = bal - amount
-            self.balance()
-        
-        else:
-            print("Enter a valid option")
-            self.transfer()
+print("****Clothing Analysis for deposit, withdraw, transfer, checking of balance *****")
+clothing = Budget("clothing")
+clothing.deposit(5000, "Second Deposit")
+clothing.withdraw(2500, "For a pair of pants and shirts")
+food.transfer(500, clothing)
+print(clothing.category_balance())
 
 
-        
-       
-
-food = Budget(2235, 243, 500)
-food.deposit()
-food.withdraw()
-food.balance()
-food.transfer()
-
-
-clothing = Budget(1424, 241, 989)
-clothing.deposit()
-clothing.withdraw()
-clothing.balance()
-clothing.transfer()
-
-
-entertainment = Budget(1424, 241, 989)
-entertainment.deposit()
-entertainment.withdraw()
-entertainment.balance()
-entertainment.transfer()
-
+print("****Entertainment Analysis for deposit, withdraw, transfer, checking of balance *****")
+entertainment = Budget("entertainment")
+entertainment.deposit(7000, "Second Deposit")
+entertainment.withdraw(1500, "For a music album")
+clothing.transfer(700, entertainment)
+print(entertainment.category_balance())
 
